@@ -29,7 +29,7 @@ require_once('components/header.php');
     async function signUp(){
     const form = event.target.form;
     console.log(form)
-       let conn = await fetch("api-signup.php", {
+       let conn = await fetch("./apis/api-signup.php", {
            method : "POST",
            body: new FormData(form)
        })

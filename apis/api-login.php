@@ -1,6 +1,6 @@
 <?php
 
-require_once('globals.php');
+require_once('../globals.php');
 
 // validate
 if( ! isset($_POST['email'])){ _res(400, ['info' => 'email required']); };

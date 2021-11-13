@@ -1,6 +1,6 @@
 <?php
 
-require_once('globals.php');
+require_once('../globals.php');
 
 // Validate name
 if( ! isset( $_POST['name'] ) ){ _res(400, ['info' => 'Name required']); };

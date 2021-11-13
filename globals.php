@@ -17,9 +17,9 @@ function _res( $status=200, $message=[] ){
 // ##############################
 function _db(){
     
-    $database_user_name = 'lauraragnars_dklaura_';
-    $database_pasword = 'H_!r7d8s+X_zkfx5'; // MAC password is root
-    $database_connection = "mysql:host=lauraragnars.dk.mysql:3306; dbname=lauraragnars_dklaura_; charset=utf8mb4";
+    $database_user_name = 'root';
+    $database_pasword = 'root'; // MAC password is root
+    $database_connection = "mysql:host=localhost:8889; dbname=company; charset=utf8mb4";
     
     $database_options = [
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

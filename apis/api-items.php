@@ -1,6 +1,6 @@
 <?php
 
-require_once('globals.php');
+require_once('../globals.php');
 
 try{
     $db = _db();
