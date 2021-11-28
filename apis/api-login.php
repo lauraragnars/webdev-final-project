@@ -24,12 +24,14 @@ try{
     $q->bindValue(':user_password', $_POST['password']);
     $q->execute();
     $row = $q->fetch();
-    //var_export($row);
     if(!$row){ _res(400, ['info' => 'Wrong credentials', 'error' => __LINE__]);}
 
     // success
     session_start();
     $_SESSION['user_name'] = $row['user_name'];
+    $_SESSION['user_last_name'] = $row['user_last_name'];
+    $_SESSION['user_email'] = $_POST['email'];
+    $_SESSION['user_password'] = $_POST['password'];
     _res(200, ['info' => 'Successfully logged in']);
 
 }catch(Exception $ex){

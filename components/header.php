@@ -1,3 +1,9 @@
+<?php
+// removes and displays errors - set to 0 on prod
+ini_set("display_errors", 1);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

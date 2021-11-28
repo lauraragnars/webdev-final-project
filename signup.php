@@ -20,6 +20,8 @@ require_once('components/header.php');
         <input name="email" type="email" placeholder="Email">
         <label for="password">Password</label>
         <input type="password" name="password" id="password" placeholder="Password">
+        <label for="password">Confirm password</label>
+        <input type="password" name="password2" id="password2" placeholder="Confirm password">
         <h3 class="error-message"></h3>
         <button onclick="signUp()">Signup</button>
     </form>

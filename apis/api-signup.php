@@ -21,6 +21,12 @@ if( ! isset($_POST['password'])){ _res(400, ['info' => 'password required']); };
 if( strlen($_POST['password']) < _PASSWORD_MIN_LEN ){ _res(400, ['info' => 'password must be at least '._PASSWORD_MIN_LEN.' characters']); };
 if( strlen($_POST['password']) > _PASSWORD_MAX_LEN ){ _res(400, ['info' => 'password cannot be more than '._PASSWORD_MAX_LEN.' characters']); };
 
+// check that passwords match 
+if( ! isset($_POST['password2'])){ _res(400, ['info' => 'Both password fields required']); };
+if( strlen($_POST['password2']) < _PASSWORD_MIN_LEN ){ _res(400, ['info' => 'password must be at least '._PASSWORD_MIN_LEN.' characters']); };
+if( strlen($_POST['password2']) > _PASSWORD_MAX_LEN ){ _res(400, ['info' => 'password cannot be more than '._PASSWORD_MAX_LEN.' characters']); };
+if($_POST['password2'] !== $_POST['password']){ _res(400, ['info' => 'Passwords do not match']); };
+
 
 // Connect to DB
 try{
@@ -56,7 +62,10 @@ try{
 
   session_start();
   $_SESSION['user_name'] = $_POST['name'];
-    
+  $_SESSION['user_last_name'] = $_POST['last_name'];
+  $_SESSION['user_email'] = $_POST['email'];
+  $_SESSION['user_password'] = $_POST['password'];
+
   $response = ["info" => "user created", "user_id" => $user_id];
   echo json_encode($response);
 }catch(Exception $ex){
