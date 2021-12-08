@@ -19,26 +19,27 @@ try{
 }
 
 try{
-    $q = $db->prepare('SELECT * FROM users WHERE user_email = :user_email AND user_password = :user_password');
+    // get data
+    $q = $db->prepare('SELECT * FROM users WHERE user_email = :user_email');
     $q->bindValue(':user_email', $_POST['email']);
-    $q->bindValue(':user_password', $_POST['password']);
     $q->execute();
     $row = $q->fetch();
-    if(!$row){ _res(400, ['info' => 'Wrong credentials', 'error' => __LINE__]);}
+    if(!$row){ _res(400, ['info' => 'Wrong email', 'error' => __LINE__]);}
+
+    $password = $_POST['password'];
+    $hashed_password = $row['user_password'];
+
+    if (!password_verify($password, $hashed_password)){
+        _res(400, ['info' => 'Wrong password', 'error' => __LINE__]);
+    }
 
     // success
     session_start();
     $_SESSION['user_name'] = $row['user_name'];
     $_SESSION['user_last_name'] = $row['user_last_name'];
     $_SESSION['user_email'] = $_POST['email'];
-    $_SESSION['user_password'] = $_POST['password'];
     _res(200, ['info' => 'Successfully logged in']);
 
 }catch(Exception $ex){
     _res(500, ['info'=>'System under maintenence', 'error'=> __LINE__]);
 }
-
-
-
-
-

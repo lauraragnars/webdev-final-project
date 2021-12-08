@@ -47,6 +47,9 @@ try{
     _res(400, ['info' => 'Email already exits']);
   }
 
+  //$password = $_POST['password'];
+  $password = password_hash($_POST['password'], PASSWORD_DEFAULT);  
+
   // Insert data in the DB
   $q = $db->prepare('INSERT INTO users 
   VALUES(:user_id, :user_name, :user_email, :user_last_name, :user_password)');
@@ -54,7 +57,7 @@ try{
   $q->bindValue(":user_name", $_POST['name']);
   $q->bindValue(":user_email", $_POST['email']);
   $q->bindValue(":user_last_name", $_POST['last_name']);
-  $q->bindValue(":user_password", $_POST['password']);
+  $q->bindValue(":user_password", $password);
   $q->execute();
   $user_id = $db->lastinsertid();
   // SUCCESS
@@ -64,7 +67,6 @@ try{
   $_SESSION['user_name'] = $_POST['name'];
   $_SESSION['user_last_name'] = $_POST['last_name'];
   $_SESSION['user_email'] = $_POST['email'];
-  $_SESSION['user_password'] = $_POST['password'];
 
   $response = ["info" => "user created", "user_id" => $user_id];
   echo json_encode($response);
