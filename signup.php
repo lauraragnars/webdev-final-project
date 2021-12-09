@@ -39,7 +39,7 @@ require_once('components/header.php');
        if (!conn.ok){
            document.querySelector(".error-message").textContent = res.info
        } else if (conn.ok){
-        location.href = "user"
+        location.href = "home"
        }
        console.log(res)
     }

@@ -16,7 +16,40 @@ img {
   max-width: 25rem;
   display: block;
   position: relative;
-  top: 5vh;
+  top: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-family: "Open Sans", sans-serif;
+  color: rgb(0, 106, 255);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: rgb(7, 50, 109);
+}
+
+nav {
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+.container {
+  margin: 10vh 10vw 0;
+}
+
+.container h1 {
+  text-align: left;
+  font-size: 1.5rem;
+  color: rgb(0, 106, 255);
 }
 
 h1 {
@@ -92,10 +125,6 @@ h1 {
 
 /*--- form ---  */
 
-form {
-  padding: 1rem 0;
-}
-
 input {
   width: 100%;
   margin: 0px;
@@ -141,6 +170,7 @@ button {
   margin-top: 1rem;
   color: white;
   transition: 0.3s;
+  cursor: pointer;
 }
 
 button:hover {

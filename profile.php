@@ -10,14 +10,14 @@
 ?>
     <nav>
         <a href="logout">Logout</a>
+        <a href="home">Home</a>
     </nav>
     <h1>
-        <?php
+        Hello, <?php
             echo $_SESSION['user_name'];
         ?>
     </h1>
-
-    </div>
+    <div class="modal">
         <form onsubmit="return false">
             <label for="name">First name</label>
             <input value=<?= $_SESSION['user_name'] ?> name="name" type="text" placeholder="First name">
@@ -25,23 +25,19 @@
             <input value=<?= $_SESSION['user_last_name'] ?> name="last_name" type="text" placeholder="Last name">
             <label for="email">Email</label>
             <input value=<?= $_SESSION['user_email'] ?> type="text" name="email" id="email" placeholder="Email">
+            <button onclick="updateInfo()">Update information</button>
             <label for="password">New password</label>
             <input type="password" name="password" id="password" placeholder="Password">
             <label for="password">Confirm password</label>
             <input type="password" name="password2" id="password2" placeholder="Confirm password">
             <h3 class="message"></h3>
-            <button onclick="updateInfo()">Update</button>
+            <button onclick="changePassword()">Change password</button>
         </form>
     </div>
-
-    <div id="#items">
-        
-    </div>
-
+    
     <script>
     async function updateInfo(){
     const form = event.target.form;
-    console.log(form)
        let conn = await fetch("./apis/api-update-user.php", {
            method : "POST",
            body: new FormData(form)
@@ -51,6 +47,21 @@
            document.querySelector(".message").textContent = res.info
        } else if (conn.ok){
             document.querySelector(".message").textContent = "User info updated!"
+       }
+       console.log(res)
+    }
+
+    async function changePassword(){
+    const form = event.target.form;
+       let conn = await fetch("./apis/api-change-password.php", {
+           method : "POST",
+           body: new FormData(form)
+       })
+       let res = await conn.json()
+       if (!conn.ok){
+           document.querySelector(".message").textContent = res.info
+       } else if (conn.ok){
+            document.querySelector(".message").textContent = "Password changed!"
        }
        console.log(res)
     }
