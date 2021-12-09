@@ -13,29 +13,39 @@
     <h1>
         Welcome, <?php echo $_SESSION['user_name']; ?>
     </h1>
+    <form onsubmit="return false">
+        <label for="name">Item name</label>
+        <input type="text" id="name" name="item_name">
+
+        <label for="desc">Item description</label>
+        <input type="text" id="desc" name="item_description">
+
+        <label for="price">Item price</label>
+        <input type="number" id="price" name="item_price">
+        <button onclick="uploadItem()">Upload item</button>
+    </form>
+    <div id="items"></div>
 </div>
-
-<form onsubmit="return false">
-    <input type="text" id="name" name="item_name" data-validate="str" data-min="2" data-max="20">
-    <button onclick="uploadItem()">Upload item</button>
-</form>
-
-<div id="items"></div>
 
 <script>
         async function uploadItem(){
             const form = event.target.form;
-            const itemName = document.querySelector("#name", form).value
+            const itemName = document.querySelector("#name").value
+            const itemDesc = document.querySelector("#desc").value
+            const itemPrice = document.querySelector("#price").value
+
             const conn = await fetch("apis/api-upload-item", {
                 method: "POST",
                 body: new FormData(form)
             })
             const res = await conn.text()
+            
             if(conn.ok){
                 document.querySelector("#items").insertAdjacentHTML("afterbegin", 
-                `<div class="item">
-                    <div class="id" data-value="${res}" >${res}</div>
+                `<div class="item" data-id="${res}">
                     <div>${itemName}</div>
+                    <div>${itemDesc}</div>
+                    <div>${itemPrice}</div>
                     <div onclick="deleteItem()">🗑️</div>
                 </div>`)
             }
@@ -43,7 +53,7 @@
 
         async function deleteItem(){
             const item = event.target.parentNode
-            const id = document.querySelector(".id", item).getAttribute('data-value')
+            const id = item.getAttribute('data-id')
             let formData = new FormData();
             formData.append('item_id', id);
 

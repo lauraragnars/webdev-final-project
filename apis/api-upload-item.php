@@ -6,6 +6,8 @@ if( !isset($_POST['item_name'])){ http_response_code(400); echo 'item_name requi
 if(strlen($_POST['item_name']) < _ITEM_MIN_LEN){ http_response_code(400); echo 'item_name min '._ITEM_MIN_LEN.' characters'; exit(); }
 if(strlen($_POST['item_name']) > ITEM_MIN_LEN){ http_response_code(400); echo 'item_name max '._ITEM_MAX_LEN.' characters'; exit(); }
 
+// @TODO add validation for all inputs
+
 try{
     $db = _db();
 
@@ -15,11 +17,13 @@ try{
 
 try{
     $item_id = bin2hex(random_bytes(16));
-    $q = $db->prepare('INSERT INTO items VALUES(:item_id, :item_name, :item_price)');
+    $q = $db->prepare('INSERT INTO items VALUES(:item_id, :item_name, :item_description, :item_price)');
     $q->bindValue(':item_id', $item_id);
     $q->bindValue(':item_name', $_POST['item_name']);
-    $q->bindValue(':item_price', 10);
+    $q->bindValue(':item_description', $_POST['item_description']);
+    $q->bindValue(':item_price', $_POST['item_price']);
     $q->execute();
+    
     // what will be returned in conn
     echo $item_id;
 }catch(Exception $ex){
