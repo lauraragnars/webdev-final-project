@@ -18,6 +18,8 @@ require_once('components/header.php');
         <input name="last_name" type="text" placeholder="Last name">
         <label for="email">Email</label>
         <input name="email" type="email" placeholder="Email">
+        <label for="phonenumber">Phone number</label>
+        <input name="phone_number" type="text" maxlength="8" placeholder="Phone number">
         <label for="password">Password</label>
         <input type="password" name="password" id="password" placeholder="Password">
         <label for="password">Confirm password</label>

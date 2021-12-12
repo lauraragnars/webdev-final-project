@@ -12,17 +12,19 @@
         <a href="logout">Logout</a>
         <a href="home">Home</a>
     </nav>
-    <h1>
+    <!-- <h1>
         Hello, <?php
             echo $_SESSION['user_name'];
         ?>
-    </h1>
+    </h1> -->
     <div class="modal">
         <form onsubmit="return false">
             <label for="name">First name</label>
             <input value=<?= $_SESSION['user_name'] ?> name="name" type="text" placeholder="First name">
             <label for="last_name">Last name</label>
             <input value=<?= $_SESSION['user_last_name'] ?> name="last_name" type="text" placeholder="Last name">
+            <label for="phone_number">Phone number</label>
+            <input value=<?= $_SESSION['user_phone_number'] ?> name="phone_number" type="text" maxlength="8" placeholder="New phone number">
             <label for="email">Email</label>
             <input value=<?= $_SESSION['user_email'] ?> type="text" name="email" id="email" placeholder="Email">
             <button onclick="updateInfo()">Update information</button>

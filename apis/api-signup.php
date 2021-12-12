@@ -16,6 +16,12 @@ if( strlen( $_POST['last_name'] ) > _NAME_MAX_LEN ){ _res(400, ['info' => 'Last 
 if( ! isset( $_POST['email'] ) ){ _res(400, ['info' => 'Email required']); };
 if( ! filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL ) ){ _res(400, ['info' => 'Email is invalid']); };
 
+// Validate phonenumber 
+if( ! isset( $_POST['phone_number'] ) ){ _res(400, ['info' => 'Phone number required']); };
+if( ! is_numeric( $_POST['phone_number'] ) ){ _res(400, ['info' => 'Phone number can only contain numbers']); };
+if( strlen( $_POST['phone_number'] ) < _PHONE_MIN_LEN ){ _res(400, ['info' => 'Phone number min '._PHONE_MIN_LEN.' characters']); };
+if( strlen( $_POST['phone_number'] ) > _PHONE_MAX_LEN ){ _res(400, ['info' => 'Phone number max '._PHONE_MAX_LEN.' characters']); };
+
 // validate the password
 if( ! isset($_POST['password'])){ _res(400, ['info' => 'password required']); };
 if( strlen($_POST['password']) < _PASSWORD_MIN_LEN ){ _res(400, ['info' => 'password must be at least '._PASSWORD_MIN_LEN.' characters']); };
@@ -52,11 +58,12 @@ try{
 
   // Insert data in the DB
   $q = $db->prepare('INSERT INTO users 
-  VALUES(:user_id, :user_name, :user_email, :user_last_name, :user_password)');
-  $q->bindValue(":user_id", null); // The db will give this automati.
+  VALUES(:user_id, :user_name, :user_email, :user_last_name, :user_phone_number, :user_password)');
+  $q->bindValue(":user_id", null); // The db will give this automatically. 
   $q->bindValue(":user_name", $_POST['name']);
   $q->bindValue(":user_email", $_POST['email']);
   $q->bindValue(":user_last_name", $_POST['last_name']);
+  $q->bindValue(":user_phone_number", $_POST['phone_number']);
   $q->bindValue(":user_password", $password);
   $q->execute();
   $user_id = $db->lastinsertid();
@@ -67,6 +74,7 @@ try{
   $_SESSION['user_name'] = $_POST['name'];
   $_SESSION['user_last_name'] = $_POST['last_name'];
   $_SESSION['user_email'] = $_POST['email'];
+  $_SESSION['user_phone_number'] = $_POST['phone_number'];
 
   $response = ["info" => "user created", "user_id" => $user_id];
   echo json_encode($response);

@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if( ! isset($_SESSION['user_name'])){
+        header('Location: index');
+        exit();
+    };
     $_title = 'Home';
     require_once('components/header.php');
 ?>
@@ -25,6 +29,17 @@
         <button onclick="uploadItem()">Upload item</button>
     </form>
     <div id="items"></div>
+
+        <?php
+
+        $data = json_decode(file_get_contents("shop.txt"));
+
+        foreach($data as $item){
+            echo "<div>{$item->id}</div>";
+            echo "<div>{$item->title}</div>";
+            echo "<img src='https://coderspage.com/2021-F-Web-Dev-Images/{$item->image}' />";
+        }
+        ?>
 </div>
 
 <script>
