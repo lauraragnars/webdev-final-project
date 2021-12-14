@@ -1,6 +1,6 @@
 <?php
 
-require_once('../globals.php');
+require_once(__DIR__.'/../globals.php');
 
 // Validate name
 if( ! isset( $_POST['name'] ) ){ _res(400, ['info' => 'Name required']); };
@@ -43,7 +43,7 @@ try{
 }
 
 try{
-
+  
   $q2 = $db->prepare('SELECT * FROM users WHERE user_email = :email');
   $q2->bindValue(":email", $_POST['email']);
   $q2->execute();
@@ -53,24 +53,41 @@ try{
     _res(400, ['info' => 'Email already exits']);
   }
 
-  //$password = $_POST['password'];
   $password = password_hash($_POST['password'], PASSWORD_DEFAULT);  
+
+  // verify
+  $verification_key = bin2hex(random_bytes(16));
 
   // Insert data in the DB
   $q = $db->prepare('INSERT INTO users 
-  VALUES(:user_id, :user_name, :user_email, :user_last_name, :user_phone_number, :user_password)');
+  VALUES(:user_id, :user_name, :user_email, :user_last_name, :user_phone_number, :user_password, :verification_key, :verified)');
   $q->bindValue(":user_id", null); // The db will give this automatically. 
   $q->bindValue(":user_name", $_POST['name']);
   $q->bindValue(":user_email", $_POST['email']);
   $q->bindValue(":user_last_name", $_POST['last_name']);
   $q->bindValue(":user_phone_number", $_POST['phone_number']);
   $q->bindValue(":user_password", $password);
+  $q->bindValue(":verification_key", $verification_key);
+  $q->bindValue(":verified", 0);
+
   $q->execute();
   $user_id = $db->lastinsertid();
+
+  $_message = "Thank you for signing up <a href='http:localhost:8888/final-project/webdev-final-project/validate-user.php?key=$verification_key&id=$user_id'>Click here to verify your account</a>";
+  $_to_email = $_POST['email'];
+
+  try{
+    require_once(__DIR__.'/../private/send-email.php');
+  
+  }catch(Exception $ex){
+    _res(500, ['info' => 'Email failure', 'error' => __LINE__]);
+  }
+
   // SUCCESS
   header('Content-Type: application/json');
 
   session_start();
+  $_SESSION['user_id'] = $user_id;
   $_SESSION['user_name'] = $_POST['name'];
   $_SESSION['user_last_name'] = $_POST['last_name'];
   $_SESSION['user_email'] = $_POST['email'];

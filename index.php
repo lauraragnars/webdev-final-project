@@ -1,6 +1,6 @@
 <?php
 $_title = 'Login';
-require_once('components/header.php');
+require_once(__DIR__.'/components/header.php');
 ?>
 
     <div class="modal">
@@ -27,8 +27,7 @@ require_once('components/header.php');
                body: new FormData(form)
            }) 
            let res = await conn.json();
-           console.log(res)
-
+        //    console.log(res, "result")
             if (!conn.ok){
             document.querySelector(".error-message").textContent = res.info
             } else if (conn.ok){
@@ -38,5 +37,5 @@ require_once('components/header.php');
         }
     </script>
 <?php
-require_once('components/footer.php');
+require_once(__DIR__.'/components/footer.php');
 ?>

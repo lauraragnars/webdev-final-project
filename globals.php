@@ -7,7 +7,8 @@ define('_PHONE_MAX_LEN', 8);
 define('_NAME_MIN_LEN', 2);
 define('_NAME_MAX_LEN', 20);
 define('_ITEM_MIN_LEN', 2);
-define('ITEM_MIN_LEN', 40);
+define('_ITEM_MAX_LEN', 40);
+
 
 // ##############################
 function _res( $status=200, $message=[] ){

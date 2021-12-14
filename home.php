@@ -5,7 +5,7 @@
         exit();
     };
     $_title = 'Home';
-    require_once('components/header.php');
+    require_once(__DIR__.'/components/header.php');
 ?>
 
 <nav>
@@ -28,18 +28,24 @@
         <input type="number" id="price" name="item_price">
         <button onclick="uploadItem()">Upload item</button>
     </form>
-    <div id="items"></div>
-
+    <div id="items">
         <?php
 
-        $data = json_decode(file_get_contents("shop.txt"));
+            $data = json_decode(file_get_contents("shop.txt"));
 
-        foreach($data as $item){
-            echo "<div>{$item->id}</div>";
-            echo "<div>{$item->title}</div>";
-            echo "<img src='https://coderspage.com/2021-F-Web-Dev-Images/{$item->image}' />";
-        }
-        ?>
+            foreach($data as $item){
+                echo "<div class='item' data-id='{$item->id}'>
+                        <div class='item-image'>
+                            <img src='https://coderspage.com/2021-F-Web-Dev-Images/{$item->image}' />
+                        </div>
+                        <div class='item-text'>
+                            <div>{$item->title}</div>
+                            <div>{$item->title}</div>
+                        </div>
+                    </div>";
+            }
+            ?>
+    </div>
 </div>
 
 <script>
@@ -58,16 +64,18 @@
             if(conn.ok){
                 document.querySelector("#items").insertAdjacentHTML("afterbegin", 
                 `<div class="item" data-id="${res}">
-                    <div>${itemName}</div>
-                    <div>${itemDesc}</div>
-                    <div>${itemPrice}</div>
-                    <div onclick="deleteItem()">🗑️</div>
+                    <div class='item-text'>
+                        <div>${itemName}</div>
+                        <div>${itemDesc}</div>
+                        <div>${itemPrice}</div>
+                        <div onclick="deleteItem()">🗑️</div>
+                    </div>
                 </div>`)
             }
         }
 
         async function deleteItem(){
-            const item = event.target.parentNode
+            const item = event.target.parentNode.parentNode
             const id = item.getAttribute('data-id')
             let formData = new FormData();
             formData.append('item_id', id);
@@ -81,5 +89,5 @@
         }
     </script>
 <?php
-require_once('components/footer.php');
+require_once(__DIR__.'/components/footer.php');
 ?>

@@ -6,17 +6,13 @@
     };
 
     $_title = 'User page';
-    require_once('components/header.php'); 
+    require_once(__DIR__.'/components/header.php'); 
 ?>
     <nav>
         <a href="logout">Logout</a>
         <a href="home">Home</a>
     </nav>
-    <!-- <h1>
-        Hello, <?php
-            echo $_SESSION['user_name'];
-        ?>
-    </h1> -->
+
     <div class="modal">
         <form onsubmit="return false">
             <label for="name">First name</label>
@@ -70,5 +66,5 @@
 </script>
     
 <?php
-require_once('components/footer.php');
+require_once(__DIR__.'/components/footer.php');
 ?>
