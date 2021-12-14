@@ -32,18 +32,18 @@ require_once(__DIR__.'/components/header.php');
 <script>
     async function signUp(){
     const form = event.target.form;
-    console.log(form)
+
        let conn = await fetch("./apis/api-signup.php", {
            method : "POST",
            body: new FormData(form)
        })
-       let res = await conn.json()
+       
        if (!conn.ok){
-           document.querySelector(".error-message").textContent = res.info
+        let res = await conn.json()
+        document.querySelector(".error-message").textContent = res.info
        } else if (conn.ok){
         location.href = "home"
        }
-       console.log(res)
     }
 </script>
 

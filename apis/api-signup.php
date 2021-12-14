@@ -71,17 +71,9 @@ try{
   $q->bindValue(":verified", 0);
 
   $q->execute();
+
   $user_id = $db->lastinsertid();
 
-  $_message = "Thank you for signing up <a href='http:localhost:8888/final-project/webdev-final-project/validate-user.php?key=$verification_key&id=$user_id'>Click here to verify your account</a>";
-  $_to_email = $_POST['email'];
-
-  try{
-    require_once(__DIR__.'/../private/send-email.php');
-  
-  }catch(Exception $ex){
-    _res(500, ['info' => 'Email failure', 'error' => __LINE__]);
-  }
 
   // SUCCESS
   header('Content-Type: application/json');
@@ -95,6 +87,16 @@ try{
 
   $response = ["info" => "user created", "user_id" => $user_id];
   echo json_encode($response);
+
+  $_message = "Thank you for signing up <a href='http:localhost:8888/final-project/webdev-final-project/validate-user.php?key=$verification_key&id=$user_id'>Click here to verify your account</a>";
+  $_to_email = $_POST['email'];
+
+  $_sms_message = "User created on Zillow";
+  $_to_phone = $_POST['phone_number'];
+
+  require_once(__DIR__.'/../private/send-email.php');
+  require_once(__DIR__.'/../private/send-sms.php');
+
 }catch(Exception $ex){
   http_response_code(500);
   echo 'System under maintainance';

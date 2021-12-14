@@ -9,7 +9,7 @@ use PHPMailer\PHPMailer\Exception;
 require_once(__DIR__.'/../mailer/Exception.php');
 require_once(__DIR__.'/../mailer/PHPMailer.php');
 require_once(__DIR__.'/../mailer/SMTP.php');
-require_once(__DIR__.'/../apis/api-signup.php');
+// require_once(__DIR__.'/../apis/api-signup.php');
 
 // Load Composer's autoloader
 // require 'vendor/autoload.php';
@@ -30,7 +30,7 @@ try {
 
 
     //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
     $mail->isSMTP();                                            // Send using SMTP
     $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
@@ -44,7 +44,7 @@ try {
 
 
     //Recipients
-    $mail->setFrom('kea2021laura@gmail.com', 'Mailer');
+    $mail->setFrom('kea2021laura@gmail.com', 'Zillow');
     $mail->addAddress($_to_email, 'Laura');     // Add a recipient
     // $mail->addAddress('ellen@example.com');               // Name is optional
     // $mail->addReplyTo('DUMMY_EMAIL_HERE_XXXXXXXXXXXXXXXXXX', 'Information');
@@ -57,14 +57,14 @@ try {
 
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Zillow';
+    $mail->Subject = 'Verify your email';
     $mail->Body    =  $_message;
     // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
-    echo 'Message has been sent';
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    exit();
 }
 
 
