@@ -23,10 +23,13 @@ try{
 
   try{
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);  
+    $forgot_password_key = bin2hex(random_bytes(16));
+
 
     // Update data 
-    $q = $db->prepare('UPDATE users SET user_password = :user_password WHERE user_id = :user_id');
+    $q = $db->prepare('UPDATE users SET user_password = :user_password, forgot_password_key = :forgot_password_key WHERE user_id = :user_id');
     $q->bindValue(":user_id", $_POST['user_id']);
+    $q->bindValue(":forgot_password_key", $forgot_password_key);
     $q->bindValue(":user_password", $password);
     $q->execute();
 
