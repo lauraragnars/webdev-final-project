@@ -54,7 +54,5 @@ try{
     echo json_encode($response);
     
   }catch(Exception $ex){
-    http_response_code(500);
-    echo 'System under maintainance';
-    exit();
+    _res(500, ['info'=>'System under maintenence', 'error'=> __LINE__]);
   }

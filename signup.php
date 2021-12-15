@@ -25,13 +25,14 @@ require_once(__DIR__.'/components/header.php');
         <label for="password">Confirm password</label>
         <input type="password" name="password2" id="password2" placeholder="Confirm password">
         <h3 class="error-message"></h3>
-        <button onclick="signUp()">Signup</button>
+        <button onclick="signUp()"><span class="lds-dual-ring"></span>Signup</button>
     </form>
 </div>
 
 <script>
     async function signUp(){
     const form = event.target.form;
+    document.querySelector(".lds-dual-ring").style.display = "inline-block";
 
        let conn = await fetch("./apis/api-signup.php", {
            method : "POST",
@@ -39,6 +40,8 @@ require_once(__DIR__.'/components/header.php');
        })
        
        if (!conn.ok){
+        document.querySelector(".lds-dual-ring").style.display = "none";
+
         let res = await conn.json()
         document.querySelector(".error-message").textContent = res.info
        } else if (conn.ok){

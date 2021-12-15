@@ -177,6 +177,7 @@ button {
   color: white;
   transition: 0.3s;
   cursor: pointer;
+  position: relative;
 }
 
 button:hover {
@@ -232,4 +233,60 @@ button:hover {
 
 .desc {
   flex-basis: 100%;
+}
+
+.item-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(22, 22, 22, 0.226);
+  height: 100vh;
+  width: 100vw;
+}
+.item-modal-content {
+  background-color: white;
+  border-radius: 5px;
+  padding: 2rem;
+  margin: 1rem auto;
+  width: 25rem;
+  height: fit-content;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+}
+
+/*--- loader ---  */
+
+.lds-dual-ring {
+  display: none;
+  position: absolute;
+  left: 33%;
+  width: 18px;
+  height: 18px;
+  margin-right: 20px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: 0px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
