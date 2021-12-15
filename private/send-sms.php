@@ -1,8 +1,4 @@
 <?php
-
-    // if( !isset($_POST['to_phone'])){ http_response_code(400); echo 'to_phone required'; exit(); }
-    // if( !isset($_POST['message'])){ http_response_code(400); echo 'message required'; exit(); }
-
     $api_key = "286de1fe-c456-4edd-b303-c2c3d1ee25dc";
 
     $fields = [

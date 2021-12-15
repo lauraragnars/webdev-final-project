@@ -17,11 +17,12 @@ try{
 
 try{
     $item_id = bin2hex(random_bytes(16));
-    $q = $db->prepare('INSERT INTO items VALUES(:item_id, :item_name, :item_description, :item_price)');
+    $q = $db->prepare('INSERT INTO items VALUES(:item_id, :item_name, :item_description, :item_price, :item_image)');
     $q->bindValue(':item_id', $item_id);
     $q->bindValue(':item_name', $_POST['item_name']);
     $q->bindValue(':item_description', $_POST['item_description']);
     $q->bindValue(':item_price', $_POST['item_price']);
+    $q->bindValue(':item_image', $_POST['item_image']);
     $q->execute();
     
     // what will be returned in conn
