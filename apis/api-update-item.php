@@ -24,7 +24,7 @@ try{
 }
 
 try{
-    $q = $db->prepare('UPDATE items SET item_name = :item_name, item_description = :item_description, item_price = :item_price, item_image = :item_image WHERE item_id = :item_id)');
+    $q = $db->prepare('UPDATE items SET item_name = :item_name, item_description = :item_description, item_price = :item_price, item_image = :item_image WHERE item_id = :item_id');
     $q->bindValue(':item_id', $_POST['item_id']);
     $q->bindValue(':item_name', $_POST['item_name']);
     $q->bindValue(':item_description', $_POST['item_description']);
@@ -35,7 +35,6 @@ try{
     header('Content-Type: application/json');
     
     $item_id = $_POST['item_id'];
-    // what will be returned in conn
     $response = ["info" => "Item updated with id: $item_id"];
     echo json_encode($response);
 }catch(Exception $ex){

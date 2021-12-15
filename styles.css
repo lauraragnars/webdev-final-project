@@ -186,14 +186,16 @@ button:hover {
 
 /*--- items ---  */
 
-#items {
+#items,
+#own-items {
   display: grid;
   grid-template-columns: 1fr;
   padding: 1rem 0;
   gap: 1rem;
 }
 @media (min-width: 800px) {
-  #items {
+  #items,
+  #own-items {
     grid-template-columns: 1fr 1fr;
   }
 }

@@ -44,7 +44,7 @@ try {
 
 
     //Recipients
-    $mail->setFrom('kea2021laura@gmail.com', 'Zillow');
+    $mail->setFrom('kea2021laura@gmail.com', 'Mailer');
     $mail->addAddress($_to_email, 'Laura');     // Add a recipient
     // $mail->addAddress('ellen@example.com');               // Name is optional
     // $mail->addReplyTo('DUMMY_EMAIL_HERE_XXXXXXXXXXXXXXXXXX', 'Information');
@@ -57,7 +57,7 @@ try {
 
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Verify your email';
+    $mail->Subject = 'Zillow';
     $mail->Body    =  $_message;
     // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 

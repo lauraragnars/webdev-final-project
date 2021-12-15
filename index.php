@@ -16,6 +16,7 @@ require_once(__DIR__.'/components/header.php');
             <input type="password" name="password" id="password" placeholder="Password">
             <h3 class="error-message"></h3>
             <button onclick="login()">Login</button>
+            <button onclick="forgotPassword()">Forgot password?</button>
         </form>
     </div>
 
@@ -27,11 +28,27 @@ require_once(__DIR__.'/components/header.php');
                body: new FormData(form)
            }) 
            let res = await conn.json();
-           
+
             if (!conn.ok){
             document.querySelector(".error-message").textContent = res.info
             } else if (conn.ok){
                 location.href = "home"
+            }
+            console.log(res)
+        }
+
+        async function forgotPassword(){
+           const form = event.target.form;
+           let conn = await fetch("./apis/api-forgot-password.php", {
+               method: "POST",
+               body: new FormData(form)
+           }) 
+           let res = await conn.json();
+
+            if (!conn.ok){
+                document.querySelector(".error-message").textContent = res.info
+            } else if (conn.ok){
+                document.querySelector(".error-message").textContent = res.info
             }
             console.log(res)
         }

@@ -57,10 +57,12 @@ try{
 
   // verify
   $verification_key = bin2hex(random_bytes(16));
+  $forgot_password_key = bin2hex(random_bytes(16));
+
 
   // Insert data in the DB
   $q = $db->prepare('INSERT INTO users 
-  VALUES(:user_id, :user_name, :user_email, :user_last_name, :user_phone_number, :user_password, :verification_key, :verified)');
+  VALUES(:user_id, :user_name, :user_email, :user_last_name, :user_phone_number, :user_password, :verification_key, :verified, :forgot_password_key)');
   $q->bindValue(":user_id", null); // The db will give this automatically. 
   $q->bindValue(":user_name", $_POST['name']);
   $q->bindValue(":user_email", $_POST['email']);
@@ -68,6 +70,7 @@ try{
   $q->bindValue(":user_phone_number", $_POST['phone_number']);
   $q->bindValue(":user_password", $password);
   $q->bindValue(":verification_key", $verification_key);
+  $q->bindValue(":forgot_password_key", $forgot_password_key);
   $q->bindValue(":verified", 0);
 
   $q->execute();

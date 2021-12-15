@@ -1,9 +1,7 @@
 <?php
 
-$shops = array('https://docs.google.com/spreadsheets/d/e/2PACX-1vSsJnnqeL6tveW1leHCEFTuwDPWzc58MXbnsFo7ybO2q_Yj8sQExJ7213J0URwKucyQDohNDSlQam9X/pub?output=tsv', 
-'https://docs.google.com/spreadsheets/d/e/2PACX-1vRgvugkuS6G0iBUS5lUjXILRIUgUmMAkzGRtG-EG42XznvuCjZ39FjiEKSRTkLHfipJ-9RWpQnmSA97/pub?output=tsv', 
-'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ0FmZc_rJWGvILtcXMbfBfBvTrtR4Vk9olA_psAtLDsbrlNUzAn0B8QD4j4J0e8cMmNNzvgG6secVz/pub?output=tsv', 
-'https://docs.google.com/spreadsheets/d/e/2PACX-1vTyFGq9xcKypt4Qy7XHkWHmPmBfW7_emvAu3SSCvLGnnpWqKyGFt4Vbn2x6Jl00F-RfSwJF6MO6AQtj/pub?output=tsv');
+$shops = array('https://docs.google.com/spreadsheets/d/e/2PACX-1vRgvugkuS6G0iBUS5lUjXILRIUgUmMAkzGRtG-EG42XznvuCjZ39FjiEKSRTkLHfipJ-9RWpQnmSA97/pub?output=tsv', 
+'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ0FmZc_rJWGvILtcXMbfBfBvTrtR4Vk9olA_psAtLDsbrlNUzAn0B8QD4j4J0e8cMmNNzvgG6secVz/pub?output=tsv');
 
 $out = [];
 

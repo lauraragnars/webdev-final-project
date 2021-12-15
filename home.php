@@ -56,6 +56,7 @@
         </div>
     </div>
 
+    <div id="own-items"></div>
     <div id="items">
         <?php
 
@@ -85,6 +86,7 @@
 <script>
     getItems()
         async function getItems(){
+            document.querySelector("#own-items").innerHTML = "";
 
             const conn = await fetch("apis/api-items", {
                 method: "POST"
@@ -93,7 +95,7 @@
             console.log(res, "items res")
             if(conn.ok){
                 res.forEach((item) =>(
-                    document.querySelector("#items").insertAdjacentHTML("afterbegin", 
+                    document.querySelector("#own-items").insertAdjacentHTML("afterbegin", 
                 `<div class="item" data-id="${item.item_id}">
                     <div class='item-image'>
                         <img src='https://coderspage.com/2021-F-Web-Dev-Images/${item.item_image}' />
@@ -137,8 +139,6 @@
             document.querySelector("#update_price").value = res.item_price
             document.querySelector("#update_image").value = res.item_image
 
-            // post to update api
-            // get values from update form
             // conn ok ? call get Items function again - cleara items fyrst - setja personal items í sér div 
             // updatea bara í frontendinum - selecta utfra id og uppfæra 
         }
@@ -157,6 +157,7 @@
             })
             const res = await conn.text()
             console.log(res)
+            getItems()
         }
 
         async function uploadItem(){
